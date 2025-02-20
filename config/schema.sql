@@ -1,0 +1,8 @@
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  image_id TEXT NOT NULL,
+  username TEXT NOT NULL,
+  text TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+  
