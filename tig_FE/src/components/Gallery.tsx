@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Box, Grid, Image, Text, Flex } from "@chakra-ui/react";
+import { Box, SimpleGrid, Image, Text, Flex } from "@chakra-ui/react";
 
 interface Image {
   id: string;
@@ -22,33 +22,41 @@ const Gallery = () => {
   }, []);
 
   return (
-    <Flex justify="center">
-      <Grid
-        templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)" }}
-        gap={6}
-        p={4}
+    <Flex justify="center" p={4}>
+      <SimpleGrid
+        columns={[1, 2, 3, 4]} // Responsive grid: 1 col on mobile, 4 cols on desktop
+        spacing="20px"
+        maxW="1200px"
+        w="100%"
       >
         {images.map((image) => (
           <Box
             key={image.id}
             onClick={() => navigate(`/image/${image.id}`)}
             cursor="pointer"
-            p={3}
-            borderWidth="1px"
-            borderRadius="md"
+            borderRadius="lg"
+            overflow="hidden"
             boxShadow="md"
             _hover={{ transform: "scale(1.05)", transition: "0.3s" }}
           >
-            <Image src={image.urls.small} alt={image.alt_description} borderRadius="md" />
-            <Text fontSize="md" fontWeight="bold" mt={2}>
-              {image.alt_description || "Untitled"}
-            </Text>
-            <Text fontSize="sm" color="gray.500">
-              {image.user.name}
-            </Text>
+            <Image
+              src={image.urls.small}
+              alt={image.alt_description}
+              objectFit="cover"
+              width="100%"
+              height="250px" // Ensures consistent image size
+            />
+            <Box p={3} bg="white">
+              <Text fontSize="md" fontWeight="bold" noOfLines={2}>
+                {image.alt_description || "Untitled"}
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                {image.user.name}
+              </Text>
+            </Box>
           </Box>
         ))}
-      </Grid>
+      </SimpleGrid>
     </Flex>
   );
 };
