@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
-    "tig_FE": "npm start --prefix tig_FE",
+    "tig_FE": "npm run dev --prefix tig_FE",
     "dev": "concurrently \"npm run server\" \"npm run tig_FE\""
   },
   "author": "Chere Izuagbala",

@@ -23,6 +23,20 @@ app.get("/api/images", async (req, res) => {
   }
 });
 
+app.get("/api/images/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const response = await axios.get(`https://api.unsplash.com/photos/${id}`, {
+      headers: { Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}` },
+    });
+    console.log({res})
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching images" });
+  }
+});
+
+
 app.use("/api/comments", commentsRouter);
 
 app.get('/', (req, res) => {
